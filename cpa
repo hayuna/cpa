@@ -16,7 +16,7 @@ echo '<!DOCTYPE html>
   </head>
   <body>
     <div id="root"></div>
-    <script src="src/index.js"></script>
+    <script type="module" src="src/index.js"></script>
   </body>
 </html>' >> index.html
 
@@ -33,7 +33,11 @@ const App = () => <div>Hello world.</div>;
 export default App;' >> src/App.js
 
 # Add start script
-sed -i "/scripts/ a\ \ \ \ \"start\": \"parcel index.html\"," package.json
+npx rexreplace "\"scripts\": {" "\"scripts\": {\n    \"start\": \"parcel index.html\","  package.json
 
 echo "Success! Created $1 at $PWD"
 echo -e "Inside that directory, run the \e[36mnpm start\e[0m command to start the development server."
+
+cd $PWD
+code $PWD
+npm start
